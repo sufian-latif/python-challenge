@@ -1,5 +1,6 @@
 from PIL import Image, ImageDraw
-import StringIO, urllib2, base64
+import StringIO
+from util import getFileData
 
 first = '''
 146,399,163,403,170,393,169,391,166,386,170,381,170,371,170,355,169,346,167,335,170,329,170,320,170,
@@ -33,9 +34,7 @@ second = '''
 first = [int(s) for s in first.split(',')]
 second = [int(s) for s in second.split(',')]
 
-request = urllib2.Request('http://www.pythonchallenge.com/pc/return/good.jpg')
-request.add_header('Authorization', 'Basic %s' % base64.encodestring('%s:%s' % ('huge', 'file')).replace('\n', ''))
-image = Image.open(StringIO.StringIO(urllib2.urlopen(request).read()))
+image = Image.open(StringIO.StringIO(getFileData('http://www.pythonchallenge.com/pc/return/good.jpg')))
 
 draw = ImageDraw.Draw(image)
 draw.line(first, width = 3, fill = 128)

@@ -1,6 +1,7 @@
-import urllib2, StringIO, re
+import StringIO, re
 from PIL import Image
-image = Image.open(StringIO.StringIO(urllib2.urlopen('http://www.pythonchallenge.com/pc/def/oxygen.png').read()))
+from util import getFileData
+image = Image.open(StringIO.StringIO(getFileData('http://www.pythonchallenge.com/pc/def/oxygen.png')))
 image = image.convert('RGB')
 height = image.size[1]
 s = ''.join([chr(image.getpixel((i, height / 2))[0]) for i in range(0, image.size[0], 7)])

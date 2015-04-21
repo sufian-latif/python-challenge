@@ -1,6 +1,7 @@
-import zipfile, re, urllib2, StringIO
+import zipfile, re, StringIO
+from util import getFileData
 
-zipFile = zipfile.ZipFile(StringIO.StringIO(urllib2.urlopen('http://www.pythonchallenge.com/pc/def/channel.zip').read()))
+zipFile = zipfile.ZipFile(StringIO.StringIO(getFileData('http://www.pythonchallenge.com/pc/def/channel.zip')))
 files = zipFile.namelist()
 nothing = re.findall('(?<=start from )[0-9]+', zipFile.open('readme.txt', 'r').read())[0]
 

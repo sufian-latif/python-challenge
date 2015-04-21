@@ -1,8 +1,7 @@
-import urllib2, StringIO, re, base64
+import StringIO, re
 from PIL import Image
-request = urllib2.Request('http://www.pythonchallenge.com/pc/return/cave.jpg')
-request.add_header('Authorization', 'Basic %s' % base64.encodestring('%s:%s' % ('huge', 'file')).replace('\n', ''))
-image = Image.open(StringIO.StringIO(urllib2.urlopen(request).read())).convert('RGB')
+from util import getFileData
+image = Image.open(StringIO.StringIO(getFileData('http://www.pythonchallenge.com/pc/return/cave.jpg'))).convert('RGB')
 pixels = image.load()
 width, height = image.size
 
